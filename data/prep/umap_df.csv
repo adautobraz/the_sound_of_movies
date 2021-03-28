@@ -1,0 +1,137 @@
+imdb_id,dim0,dim1,title,year,genres,top_250_rank,color_type,rating,metascore
+tt0111161,6.025501,0.22274825,The Shawshank Redemption,1994.0,['Drama'],1.0,Color,9.3,80.0
+tt0068646,5.9829617,-0.8364131,The Godfather,1972.0,"['Crime', 'Drama']",2.0,Color,9.2,100.0
+tt0071562,6.083211,-0.98758936,The Godfather: Part II,1974.0,"['Crime', 'Drama']",3.0,Color,9.0,90.0
+tt0468569,5.422021,-1.0408875,The Dark Knight,2008.0,"['Action', 'Crime', 'Drama', 'Thriller']",4.0,Color,9.0,84.0
+tt0050083,6.2822638,-0.6322989,12 Angry Men,1957.0,"['Crime', 'Drama']",5.0,Black and White,9.0,96.0
+tt0108052,7.3119874,0.8808188,Schindler's List,1993.0,"['Biography', 'Drama', 'History']",6.0,Black and White,8.9,94.0
+tt0167260,2.6599832,2.4250195,The Lord of the Rings: The Return of the King,2003.0,"['Action', 'Adventure', 'Drama', 'Fantasy']",7.0,Color,8.9,94.0
+tt0110912,6.0764575,-0.6579424,Pulp Fiction,1994.0,"['Crime', 'Drama']",8.0,Color,8.9,94.0
+tt0060196,4.9260006,0.5189109,"The Good, the Bad and the Ugly",1966.0,['Western'],9.0,Color,8.8,90.0
+tt0120737,2.4836042,2.406325,The Lord of the Rings: The Fellowship of the Ring,2001.0,"['Action', 'Adventure', 'Drama', 'Fantasy']",10.0,Color,8.8,92.0
+tt0137523,5.82104,0.58221114,Fight Club,1999.0,['Drama'],11.0,Color,8.8,66.0
+tt0109830,5.391328,1.7807333,Forrest Gump,1994.0,"['Drama', 'Romance']",12.0,Black and White,8.8,82.0
+tt1375666,3.1960928,2.627841,Inception,2010.0,"['Action', 'Adventure', 'Sci-Fi', 'Thriller']",13.0,Color,8.8,74.0
+tt0167261,2.2859712,2.5422451,The Lord of the Rings: The Two Towers,2002.0,"['Action', 'Adventure', 'Drama', 'Fantasy']",14.0,Color,8.7,87.0
+tt0080684,2.7627618,2.5298846,Star Wars: Episode V - The Empire Strikes Back,1980.0,"['Action', 'Adventure', 'Fantasy', 'Sci-Fi']",15.0,Color,8.7,82.0
+tt0133093,3.3068705,2.8500862,The Matrix,1999.0,"['Action', 'Sci-Fi']",16.0,Color,8.7,73.0
+tt0099685,6.4228373,-0.038804043,Goodfellas,1990.0,"['Biography', 'Crime', 'Drama']",17.0,Color,8.7,90.0
+tt0073486,5.8518596,0.4944321,One Flew Over the Cuckoo's Nest,1975.0,['Drama'],18.0,Color,8.7,83.0
+tt0047478,4.949786,3.0960517,Seven Samurai,1954.0,"['Action', 'Adventure', 'Drama']",19.0,Black and White,8.6,98.0
+tt0114369,4.493608,-0.5203456,Se7en,1995.0,"['Crime', 'Drama', 'Mystery', 'Thriller']",20.0,Color,8.6,65.0
+tt0118799,4.7149897,0.97902757,Life Is Beautiful,1997.0,"['Comedy', 'Drama', 'Romance', 'War']",21.0,Color,8.6,59.0
+tt0317248,5.813912,-0.55306727,City of God,2002.0,"['Crime', 'Drama']",22.0,Color,8.6,79.0
+tt0102926,5.141146,-0.87791896,The Silence of the Lambs,1991.0,"['Crime', 'Drama', 'Thriller']",23.0,Color,8.6,85.0
+tt0038650,1.5662355,2.7445245,It's a Wonderful Life,1946.0,"['Drama', 'Family', 'Fantasy']",24.0,Black and White,8.6,89.0
+tt0076759,2.5682912,2.8099551,Star Wars: Episode IV - A New Hope,1977.0,"['Action', 'Adventure', 'Fantasy', 'Sci-Fi']",25.0,Color,8.6,90.0
+tt0120815,3.6003296,1.2154349,Saving Private Ryan,1998.0,"['Drama', 'War']",26.0,Color,8.6,91.0
+tt0245429,1.5390071,2.278107,Spirited Away,2001.0,"['Animation', 'Adventure', 'Family', 'Fantasy', 'Mystery']",27.0,Color,8.6,96.0
+tt0120689,4.1518235,-0.04742908,The Green Mile,1999.0,"['Crime', 'Drama', 'Fantasy', 'Mystery']",28.0,Color,8.6,61.0
+tt0816692,3.718359,2.014654,Interstellar,2014.0,"['Adventure', 'Drama', 'Sci-Fi', 'Thriller']",29.0,Color,8.6,74.0
+tt6751668,4.9798884,-0.37473428,Parasite,2019.0,"['Comedy', 'Drama', 'Thriller']",30.0,Color,8.6,96.0
+tt0110413,4.789983,-1.2598311,Léon: The Professional,1994.0,"['Action', 'Crime', 'Drama', 'Thriller']",31.0,Color,8.5,64.0
+tt0114814,4.232956,-0.7921663,The Usual Suspects,1995.0,"['Crime', 'Mystery', 'Thriller']",32.0,Color,8.5,77.0
+tt0056058,5.886036,3.025251,Harakiri,1962.0,"['Action', 'Drama', 'Mystery']",33.0,Black and White,8.6,85.0
+tt0110357,1.3769664,1.9110167,The Lion King,1994.0,"['Animation', 'Adventure', 'Drama', 'Family', 'Musical']",34.0,Color,8.5,88.0
+tt0088763,3.4139662,2.4722497,Back to the Future,1985.0,"['Adventure', 'Comedy', 'Sci-Fi']",35.0,Color,8.5,87.0
+tt0253474,6.2952533,1.257652,The Pianist,2002.0,"['Biography', 'Drama', 'Music', 'War']",36.0,Black and White,8.5,85.0
+tt0103064,3.4141734,2.8527455,Terminator 2: Judgment Day,1991.0,"['Action', 'Sci-Fi']",37.0,Color,8.5,75.0
+tt0120586,5.894065,1.6947786,American History X,1998.0,['Drama'],38.0,Black and White,8.5,62.0
+tt0027977,4.9109735,2.811608,Modern Times,1936.0,"['Comedy', 'Drama', 'Family', 'Romance']",39.0,Black and White,8.5,96.0
+tt0054215,3.5744545,-0.62145257,Psycho,1960.0,"['Horror', 'Mystery', 'Thriller']",40.0,Black and White,8.5,97.0
+tt0172495,3.129738,3.2330596,Gladiator,2000.0,"['Action', 'Adventure', 'Drama']",41.0,Color,8.5,67.0
+tt0021749,4.9979424,2.6424694,City Lights,1931.0,"['Comedy', 'Drama', 'Romance']",42.0,Black and White,8.5,99.0
+tt0407887,5.0537357,-0.8263999,The Departed,2006.0,"['Crime', 'Drama', 'Thriller']",43.0,Color,8.5,85.0
+tt1675434,6.4259253,0.44938698,The Intouchables,2011.0,"['Biography', 'Comedy', 'Drama']",44.0,Color,8.5,57.0
+tt2582802,6.3713083,1.1171505,Whiplash,2014.0,"['Drama', 'Music']",45.0,Color,8.5,88.0
+tt0482571,4.201657,-0.29260892,The Prestige,2006.0,"['Drama', 'Mystery', 'Sci-Fi', 'Thriller']",46.0,Color,8.5,66.0
+tt0095327,3.11884,1.2178836,Grave of the Fireflies,1988.0,"['Animation', 'Drama', 'War']",47.0,Color,8.5,94.0
+tt0064116,4.852196,0.30790436,Once Upon a Time in the West,1968.0,['Western'],48.0,Color,8.5,80.0
+tt8503618,7.145865,0.44372267,Hamilton,2020.0,"['Biography', 'Drama', 'History', 'Musical']",49.0,Color,8.6,90.0
+tt0034583,5.080685,2.0866241,Casablanca,1942.0,"['Drama', 'Romance', 'War']",50.0,Black and White,8.5,100.0
+tt0095765,5.76246,0.75267744,Cinema Paradiso,1988.0,['Drama'],51.0,Color,8.5,80.0
+tt0047396,3.7215014,-0.75330323,Rear Window,1954.0,"['Mystery', 'Thriller']",52.0,Color,8.4,100.0
+tt0078748,3.9307427,1.8637818,Alien,1979.0,"['Horror', 'Sci-Fi']",53.0,Color,8.4,89.0
+tt0078788,3.7002864,0.706698,Apocalypse Now,1979.0,"['Drama', 'Mystery', 'War']",54.0,Color,8.4,94.0
+tt0209144,3.8102105,-0.8359694,Memento,2000.0,"['Mystery', 'Thriller']",55.0,Black and White,8.4,80.0
+tt0082971,2.9378839,3.2494159,Raiders of the Lost Ark,1981.0,"['Action', 'Adventure']",57.0,Color,8.4,85.0
+tt1853728,5.518635,0.41056842,Django Unchained,2012.0,"['Drama', 'Western']",58.0,Color,8.4,81.0
+tt0405094,3.9209073,-0.6220924,The Lives of Others,2006.0,"['Drama', 'Mystery', 'Thriller']",59.0,Color,8.4,89.0
+tt7286456,4.9909244,-1.3202065,Joker,2019.0,"['Crime', 'Drama', 'Thriller']",60.0,Color,8.5,59.0
+tt0050825,4.9713616,1.9599549,Paths of Glory,1957.0,"['Drama', 'War']",61.0,Black and White,8.4,90.0
+tt0910970,1.6328477,2.0548298,WALL·E,2008.0,"['Animation', 'Adventure', 'Family', 'Sci-Fi']",62.0,Color,8.4,95.0
+tt0081505,4.8871193,-0.05738028,The Shining,1980.0,"['Drama', 'Horror']",63.0,Color,8.4,66.0
+tt4154756,3.07333,2.7461593,Avengers: Infinity War,2018.0,"['Action', 'Adventure', 'Sci-Fi']",64.0,Color,8.4,68.0
+tt0364569,4.2938848,-1.0596852,Oldboy,2003.0,"['Action', 'Drama', 'Mystery', 'Thriller']",67.0,Color,8.4,77.0
+tt0119698,1.2355962,2.473849,Princess Mononoke,1997.0,"['Animation', 'Adventure', 'Fantasy']",68.0,Color,8.4,76.0
+tt4633694,1.5605214,2.0094697,Spider-Man: Into the Spider-Verse,2018.0,"['Animation', 'Action', 'Adventure', 'Family', 'Sci-Fi']",69.0,Color,8.4,87.0
+tt0057012,5.513626,2.1817408,Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb,1964.0,['Comedy'],70.0,Black and White,8.4,97.0
+tt1345836,2.9592671,3.3124416,The Dark Knight Rises,2012.0,"['Action', 'Adventure']",71.0,Color,8.4,78.0
+tt0090605,3.6033568,2.2720888,Aliens,1986.0,"['Action', 'Adventure', 'Sci-Fi', 'Thriller']",73.0,Color,8.3,84.0
+tt5311514,1.508954,2.5011404,Your Name.,2016.0,"['Animation', 'Drama', 'Fantasy', 'Romance']",74.0,Color,8.4,79.0
+tt4154796,3.3265886,2.4452736,Avengers: Endgame,2019.0,"['Action', 'Adventure', 'Drama', 'Sci-Fi']",75.0,Color,8.4,78.0
+tt2380307,1.3388717,2.3635106,Coco,2017.0,"['Animation', 'Adventure', 'Family', 'Fantasy', 'Music', 'Mystery']",76.0,Color,8.4,81.0
+tt0169547,5.8972344,1.858028,American Beauty,1999.0,['Drama'],77.0,Black and White,8.3,84.0
+tt0112573,7.17837,0.8284985,Braveheart,1995.0,"['Biography', 'Drama', 'History', 'War']",78.0,Color,8.3,68.0
+tt0082096,4.0373,1.5924665,Das Boot,1981.0,"['Adventure', 'Drama', 'Thriller', 'War']",79.0,Color,8.3,86.0
+tt1187043,5.2525787,0.15285046,3 Idiots,2009.0,"['Comedy', 'Drama']",80.0,Color,8.4,67.0
+tt0114709,1.2447267,2.307654,Toy Story,1995.0,"['Animation', 'Adventure', 'Comedy', 'Family', 'Fantasy']",81.0,Color,8.3,95.0
+tt8267604,5.5739393,0.70482886,Capernaum,2018.0,['Drama'],83.0,Color,8.4,75.0
+tt0086879,6.9697003,1.020197,Amadeus,1984.0,"['Biography', 'Drama', 'History', 'Music']",84.0,Color,8.3,88.0
+tt0361748,3.9738605,1.3263785,Inglourious Basterds,2009.0,"['Adventure', 'Drama', 'War']",85.0,Color,8.3,69.0
+tt0086190,2.7100973,2.726423,Star Wars: Episode VI - Return of the Jedi,1983.0,"['Action', 'Adventure', 'Fantasy', 'Sci-Fi']",86.0,Color,8.3,58.0
+tt0119217,4.970381,1.2264303,Good Will Hunting,1997.0,"['Drama', 'Romance']",88.0,Color,8.3,70.0
+tt0105236,4.9727993,-0.7159217,Reservoir Dogs,1992.0,"['Crime', 'Drama', 'Thriller']",89.0,Color,8.3,79.0
+tt0062622,3.5061755,2.5374212,2001: A Space Odyssey,1968.0,"['Adventure', 'Sci-Fi']",90.0,Color,8.3,84.0
+tt0180093,5.426716,0.83120084,Requiem for a Dream,2000.0,['Drama'],91.0,Color,8.3,68.0
+tt0052357,3.7974238,-0.65839714,Vertigo,1958.0,"['Mystery', 'Romance', 'Thriller']",92.0,Color,8.3,100.0
+tt0338013,4.797475,1.4281383,Eternal Sunshine of the Spotless Mind,2004.0,"['Drama', 'Romance', 'Sci-Fi']",94.0,Color,8.3,89.0
+tt2106476,5.5694523,1.0935721,The Hunt,2012.0,['Drama'],95.0,Color,8.3,77.0
+tt0033467,5.905642,2.7948043,Citizen Kane,1941.0,"['Drama', 'Mystery']",97.0,Black and White,8.3,100.0
+tt8579674,3.62844,1.0685791,1917,2019.0,"['Drama', 'War']",98.0,Color,8.3,78.0
+tt0093058,3.982627,1.1178412,Full Metal Jacket,1987.0,"['Drama', 'War']",99.0,Color,8.3,76.0
+tt0045152,4.4495215,0.6852516,Singin' in the Rain,1952.0,"['Comedy', 'Musical', 'Romance']",101.0,Color,8.3,99.0
+tt0066921,5.5109196,2.6417508,A Clockwork Orange,1971.0,"['Crime', 'Drama', 'Sci-Fi']",103.0,Black and White,8.3,77.0
+tt0053125,3.6416757,-0.3494306,North by Northwest,1959.0,"['Adventure', 'Mystery', 'Thriller']",104.0,Color,8.3,98.0
+tt0208092,5.59753,-0.20137358,Snatch,2000.0,"['Comedy', 'Crime']",105.0,Color,8.3,55.0
+tt0086250,5.748744,-0.45055705,Scarface,1983.0,"['Crime', 'Drama']",106.0,Color,8.3,65.0
+tt0075314,5.6281023,-0.55992854,Taxi Driver,1976.0,"['Crime', 'Drama']",107.0,Color,8.3,94.0
+tt0211915,5.4549556,2.20134,Amélie,2001.0,"['Comedy', 'Romance']",109.0,Black and White,8.3,69.0
+tt0056172,7.050983,1.0437491,Lawrence of Arabia,1962.0,"['Adventure', 'Biography', 'Drama', 'History', 'War']",110.0,Color,8.3,100.0
+tt0435761,1.4037074,2.482964,Toy Story 3,2010.0,"['Animation', 'Adventure', 'Comedy', 'Family', 'Fantasy']",111.0,Color,8.3,92.0
+tt0070735,5.6358843,-0.08519188,The Sting,1973.0,"['Comedy', 'Crime', 'Drama']",112.0,Color,8.3,83.0
+tt0017136,5.1807475,3.0552533,Metropolis,1927.0,"['Drama', 'Sci-Fi']",113.0,Black and White,8.3,98.0
+tt1832382,4.8329163,-0.6172388,A Separation,2011.0,"['Drama', 'Thriller']",114.0,Color,8.3,95.0
+tt1255953,3.8785229,0.89611226,Incendies,2010.0,"['Drama', 'Mystery', 'War']",115.0,Color,8.3,80.0
+tt0059578,4.8540263,0.35859784,For a Few Dollars More,1965.0,['Western'],117.0,Color,8.3,74.0
+tt0053604,5.6061783,2.222678,The Apartment,1960.0,"['Comedy', 'Drama', 'Romance']",118.0,Black and White,8.3,94.0
+tt0036775,5.997254,2.7394793,Double Indemnity,1944.0,"['Crime', 'Drama', 'Film-Noir', 'Mystery', 'Thriller']",119.0,Black and White,8.3,95.0
+tt0056592,5.510794,2.8778877,To Kill a Mockingbird,1962.0,"['Crime', 'Drama']",120.0,Black and White,8.2,88.0
+tt1049413,1.29048,1.9729544,Up,2009.0,"['Animation', 'Adventure', 'Comedy', 'Family']",121.0,Color,8.2,88.0
+tt0097576,2.8283882,3.0525014,Indiana Jones and the Last Crusade,1989.0,"['Action', 'Adventure']",122.0,Color,8.2,65.0
+tt0113277,4.920089,-1.1301023,Heat,1995.0,"['Crime', 'Drama', 'Thriller']",123.0,Color,8.2,76.0
+tt0119488,4.3497787,-0.6145327,L.A. Confidential,1997.0,"['Crime', 'Drama', 'Mystery', 'Thriller']",124.0,Color,8.2,90.0
+tt0095016,4.6210537,-1.1372973,Die Hard,1988.0,"['Action', 'Thriller']",125.0,Color,8.2,72.0
+tt0071853,2.021583,2.5823987,Monty Python and the Holy Grail,1975.0,"['Adventure', 'Comedy', 'Fantasy']",126.0,Color,8.2,91.0
+tt0042876,5.468062,2.943242,Rashomon,1950.0,"['Crime', 'Drama', 'Mystery']",127.0,Black and White,8.2,98.0
+tt0372784,3.063227,3.2299037,Batman Begins,2005.0,"['Action', 'Adventure']",129.0,Color,8.2,70.0
+tt6966692,6.412698,0.76622576,Green Book,2018.0,"['Biography', 'Comedy', 'Drama', 'Music']",130.0,Color,8.2,69.0
+tt0363163,7.048015,0.70275897,Downfall,2004.0,"['Biography', 'Drama', 'History', 'War']",131.0,Color,8.2,82.0
+tt0118849,2.2790136,1.4319005,Children of Heaven,1997.0,"['Drama', 'Family', 'Sport']",132.0,Color,8.3,77.0
+tt0105695,5.308868,0.5035491,Unforgiven,1992.0,"['Drama', 'Western']",133.0,Color,8.2,85.0
+tt0089881,4.351122,1.3996714,Ran,1985.0,"['Action', 'Drama', 'War']",134.0,Color,8.2,96.0
+tt0053291,5.6700835,2.0762885,Some Like It Hot,1959.0,"['Comedy', 'Music', 'Romance']",135.0,Black and White,8.2,98.0
+tt0347149,1.0969946,2.2268157,Howl's Moving Castle,2004.0,"['Animation', 'Adventure', 'Family', 'Fantasy']",136.0,Color,8.2,80.0
+tt0268978,6.5864487,0.45246097,A Beautiful Mind,2001.0,"['Biography', 'Drama']",137.0,Color,8.2,72.0
+tt0042192,5.9401293,2.4148257,All About Eve,1950.0,['Drama'],138.0,Black and White,8.2,98.0
+tt0112641,6.087667,-0.2658755,Casino,1995.0,"['Crime', 'Drama']",139.0,Color,8.2,73.0
+tt0057115,7.059496,0.9953644,The Great Escape,1963.0,"['Adventure', 'Drama', 'History', 'Thriller', 'War']",140.0,Color,8.2,86.0
+tt0993846,6.3736634,0.18435042,The Wolf of Wall Street,2013.0,"['Biography', 'Crime', 'Drama']",141.0,Color,8.2,75.0
+tt0457430,3.1633554,1.4968622,Pan's Labyrinth,2006.0,"['Drama', 'Fantasy', 'War']",142.0,Color,8.2,98.0
+tt1305806,4.087866,-0.49349248,The Secret in Their Eyes,2009.0,"['Drama', 'Mystery', 'Romance', 'Thriller']",143.0,Color,8.2,80.0
+tt0120735,5.4347744,-0.32968587,"Lock, Stock and Two Smoking Barrels",1998.0,"['Action', 'Comedy', 'Crime']",144.0,Color,8.2,66.0
+tt0469494,5.4910727,1.1482128,There Will Be Blood,2007.0,['Drama'],145.0,Color,8.2,93.0
+tt0081398,6.0140057,1.7800744,Raging Bull,1980.0,"['Biography', 'Drama', 'Sport']",146.0,Black and White,8.2,89.0
+tt0096283,1.3817596,2.2254565,My Neighbor Totoro,1988.0,"['Animation', 'Family', 'Fantasy']",147.0,Color,8.2,86.0
+tt0055031,4.8740354,1.8719764,Judgment at Nuremberg,1961.0,"['Drama', 'War']",148.0,Black and White,8.2,60.0
+tt0040897,5.2468386,2.572062,The Treasure of the Sierra Madre,1948.0,"['Adventure', 'Drama', 'Western']",149.0,Black and White,8.2,98.0
