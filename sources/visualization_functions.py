@@ -11,6 +11,7 @@ def space_out(space):
     for i in range(0, space):
         st.text('')
 
+
 def pad_cols(col_list):
     new_list = [1, *col_list, 1]
     all_cols = st.beta_columns(new_list)
@@ -150,16 +151,21 @@ def top_movies_by__type(movies_melt, sound_color_map):
     top = df.loc[df['var_rank'] <= 5].copy()
 
     top.loc[:, 'text'] = top['title'].apply(lambda x:f"<i>{break_text(x, 10)}</i>")
+    top.loc[top['var_rank'] == 1, 'text'] = top['title'].apply(lambda x:f"<i><b>{x}</b></i>")
 
     fig = px.bar(top, x='var_rank', y='value', facet_row='var_name', orientation='v', color='var_name',
                 color_discrete_map= sound_color_map, text='text', facet_row_spacing=0.05,
                 hover_name='title', hover_data=['movie_genres']
                 )
 
-    # fig.update_yaxes(autorange='reversed')
-    fig.update_xaxes(tickvals=[1, 5], title='Ranking', tickprefix='Top ', row=1)
+    fig.update_xaxes(side='top', showticklabels=False, title='')
+    # fig.update_xaxes(row=3, 
+    fig.update_xaxes(tickvals=[1, 3, 5], tickprefix='Top ', row=3, showticklabels=True,
+        tickfont_size=14
+    )
 
-    fig.update_yaxes(range=[-1, 150], dtick= 100, ticksuffix='%', title='Share <br>of movie (%)')
+    fig.update_yaxes(range=[-1, 120], dtick= 100, ticksuffix='%', title='')
+    fig.update_yaxes(title='Share of movie (%)', row=2)
 
     fig.update_traces(textposition='outside')
 
@@ -260,7 +266,7 @@ def sound_share_by__type__genre(movies_melt_df, sound_color_map):
 
     df.loc[:, 'rank_var'] = df.groupby(['var_name', 'op'])['value'].rank(ascending=False)
     df.loc[:, 'text'] = df.apply(lambda x: "{:.1f}%".format(x['value']), axis=1)
-    df.loc[:, 'y_axis'] = df.apply(lambda x: "<b>{}</b> ({})".format(x['genres'], x['#Movies']), axis=1)
+    df.loc[:, 'y_axis'] = df.apply(lambda x: "<b>{}</b><br>({})".format(x['genres'], x['#Movies']), axis=1)
     df.loc[:, 'color_highlight'] = df.apply(lambda x: x['var_name'] if x['rank_var'] <= 3 else 'Mute', axis=1)
     df.loc[:, 'not_highlight'] = df['color_highlight'] == 'Mute'
     df.loc[:, 'Operation'] = df['op'].str.title()
@@ -269,14 +275,17 @@ def sound_share_by__type__genre(movies_melt_df, sound_color_map):
     df = df.sort_values(by=['Operation', 'not_highlight','var_name', 'value'], ascending=True)
 
     fig = px.bar(df, x='value', y='y_axis', text='text', orientation='h',
-                facet_col_spacing=0.1, facet_col='var_name', animation_frame='Operation',
+                facet_col_spacing=0.05, facet_col='var_name', animation_frame='Operation',
                 hover_name='genres', hover_data=['#Movies'], #category_orders={'y_axis':order},
                 color_discrete_map=sound_color_map,  color='color_highlight')
 
-    fig.update_xaxes(title='Share<br>of movie (%)', ticksuffix='%', tickvals=[0, 100], range=[0,110])
+    fig.update_xaxes(title='', ticksuffix='%', tickvals=[0, 100], range=[-5,110])
+    fig.update_xaxes(title='Share of movie (%)', col=2)
+
     fig.update_yaxes(col=1, autorange='reversed', title='')
 
-    fig = facet_prettify(fig)
+    fig = facet_prettify(fig, False)
+    fig.for_each_annotation(lambda a: a.update(text=break_text(a.text, 5)))
     fig = format_fig(fig)
 
     fig.update_layout(
@@ -287,7 +296,7 @@ def sound_share_by__type__genre(movies_melt_df, sound_color_map):
         showlegend=False)
 
     fig = leave_only_slider(fig)
-    fig['layout']['sliders'][0]['pad']=dict(r= 10, t= 100)
+    # fig['layout']['sliders'][0]['pad']=dict(r= 10, t= 100)
 
     return fig
 
@@ -444,7 +453,7 @@ def sound_type_by__position_genre(positions_df, smooth, sound_type, sound_color_
     return fig
 
 
-def all_movies_similarity(umap_df):
+def all_movies_similarity(umap_df, labels):
     # View all movies
     df = umap_df.copy()
 
@@ -457,10 +466,22 @@ def all_movies_similarity(umap_df):
 
     df = df.sort_values(by='period')
 
+    hover_infos = {
+        'year':True, 
+        'period':False,
+        'top_250_rank':True, 
+        'movie_genres':True, 
+        'color_type':True, 
+        'rating':True, 
+        'popularity':False,
+        'metascore':True,
+        'dim0':False,
+        'dim1':False
+    }
+
     fig = px.scatter(df, x='dim0', y='dim1', hover_name='title', color='period',
-                    size='popularity', size_max=20,
-                    hover_data=['year', 'top_250_rank', 'movie_genres', 
-                                'color_type', 'rating', 'metascore'],
+                    size='popularity', size_max=20, labels=labels,
+                    hover_data=hover_infos,
                     color_discrete_sequence=px.colors.sequential.Agsunset
                     )
     fig = format_fig(fig)

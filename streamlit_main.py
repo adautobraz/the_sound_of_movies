@@ -34,6 +34,16 @@ sound_color_map['Mute'] = px.colors.qualitative.Pastel2[-1]
 
 general_config ={'displayModeBar':False}
 
+col_labels = {
+    'period': 'Period',
+    'year': 'Year',
+    'movie_genres': 'Genres',
+    'rating':'Rating',
+    'metascore':'Metascore',
+    'top_250_rank':'IMDB Ranking',
+    'color_type':'Color'
+}
+
 cols_baseline=12
 image_counter = -1
 image_ref = string.ascii_uppercase
@@ -102,13 +112,13 @@ center.markdown(text, unsafe_allow_html=True)
 
 image_counter += 1
 image_name = image_ref[image_counter]
-fig = all_movies_similarity(umap_df)
+fig = all_movies_similarity(umap_df, col_labels)
 fig.update_layout(
     legend_orientation='h',
     margin_r=0, 
     margin_b=0,
     height=400,
-    title=f'<b>{image_name}</b> - All Top 150 IMDB movies, grouped by similarity')
+    title=f'<b>{image_name}</b> - All Top 150 IMDB movies,<br>grouped by similarity')
 center.plotly_chart(fig, use_container_width=True, config=general_config)
 space_out(2)
 
@@ -192,7 +202,7 @@ fig = sound_type_distribution_bar(movies_melt, sound_color_map)
 fig.update_layout(
     margin_r=0, 
     margin_b=0,
-    margin_t=120,
+    height=250,
     title=f'<b>{image_name}</b> - What is the most common<br>sound in movies?')
 right.plotly_chart(fig, use_container_width=True, config=general_config)
 space_out(1)
@@ -246,7 +256,9 @@ fig = top_movies_by__type(movies_melt, sound_color_map)
 fig.update_layout(
     title=f'<b>{image_name}</b> - Top 5 movies, for each sound type',
     margin_r=20,
-    margin_l=0
+    margin_l=0,
+    margin_b=50,
+    margin_t=100
 )
 # fig.update_xaxes(range=[0,150], dtick=100)
 center.plotly_chart(fig, use_container_width=True, config=general_config)
@@ -403,10 +415,11 @@ center.markdown(text, unsafe_allow_html=True)
 
 fig = sound_share_by__type__genre(movies_melt, sound_color_map)
 fig.update_layout(
-    margin_r=50,
+    margin_r=10,
     margin_l=0,
     margin_b=200,
-    height=1000,
+    margin_t=150,
+    height=1200,
     title=f'<b>{image_name}</b> - Sound distribution, per genre<br>(highlight to Top 3 of each category)')
 center.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
 
@@ -486,7 +499,7 @@ space_out(3)
 text = """
 ### <b>Wanna know more?</b>
 The complete code of this analysis can be found on the
-<a href="https://github.com/adautobraz/ergo/tree/master/silence_in_movies"> github repository </a>.
+<a href="https://github.com/adautobraz/ergo/tree/master/silence_in_movies"> github repository</a>. 
 All of the code is written in Python, data wrangling with Pandas, visualizations with Plotly,
 and hosting with Streamlit.
 """
