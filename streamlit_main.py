@@ -32,7 +32,9 @@ sound_types = ['Silence', 'Dialogue', 'Other sounds']
 sound_color_map = {sound_types[i]:main_palette[i] for i in range(0, len(sound_types))}
 sound_color_map['Mute'] = px.colors.qualitative.Pastel2[-1]
 
-cols_baseline=8
+general_config ={'displayModeBar':False}
+
+cols_baseline=12
 image_counter = -1
 image_ref = string.ascii_uppercase
 image = Image.open(data_path/'prep/image.jpg')
@@ -102,24 +104,28 @@ image_counter += 1
 image_name = image_ref[image_counter]
 fig = all_movies_similarity(umap_df)
 fig.update_layout(
+    legend_orientation='h',
     margin_r=0, 
     margin_b=0,
     height=400,
     title=f'<b>{image_name}</b> - All Top 150 IMDB movies, grouped by similarity')
-center.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
+center.plotly_chart(fig, use_container_width=True, config=general_config)
+space_out(2)
+
+
+text = """
+On <b>{}</b>, to group movies, we consider each movie release year, 
+sound distribution, associated genres and coloring technique.  
+The dimensions are a projection, so the only real meaning is 
+that closer points have more similar characteristics, which yields some interesting separations. 
+Up left, for example, there seems to be the Animation group, followed, closely on its
+right by the Adventure block. What other groups can you find?
+""".format(image_name)
+center.markdown(text, unsafe_allow_html=True)
 
 
 pad_l = 3
 left, right = pad_cols([pad_l,  cols_baseline - pad_l])
-
-text = """
-On <b>{}</b>, we can see some interesting separations. 
-Up left, for example, there seems to be the Animation group, followed, closely on its
-right by the Adventure block. What other groups can you find?
-""".format(image_name)
-
-left.markdown(text, unsafe_allow_html=True)
-
 
 image_counter += 1
 image_name = image_ref[image_counter]
@@ -128,12 +134,6 @@ text = """
 As it's possible to see on <b>{}</b>, on the top 150 of IMDB there's an imbalance, 
 with most of the movies on the list being released on the last three decades.
 Besides, most films (almost 60%) have a duration between 2 and 3 hours.
-
-To reduce the effects of such peculiarities, most of the following analysis will be 
-computed considering relative measures, to make it possible to compare different
-absolute values.
-
-So then, regarding the sound of movies, what should one expect from the 'average' movie?
 """.format(image_name)
 
 left.markdown(text, unsafe_allow_html=True)
@@ -141,10 +141,29 @@ left.markdown(text, unsafe_allow_html=True)
 fig = all_movies_hist_summary(movies_df, main_palette)
 fig.update_layout(
     margin_b=0,
-    height=400,
-    title=f'<b>{image_name}</b> - Distribution of movies regarding duration and release year 150')
-right.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
+    margin_r=0,
+    margin_t=50,
+    height=300,
+    xaxis_title='',
+    title=f'<b>{image_name}</b> - Distribution of movies:<br>duration and release year')
 
+fig.update_xaxes(title='Duration',col = 1)
+fig.update_xaxes(title='Year',col = 2)
+fig.update_yaxes(range=[0, 70])
+
+fig.for_each_annotation(lambda x: x.update(text=''))
+
+right.plotly_chart(fig, use_container_width=True, config=general_config)
+
+center = pad_cols([cols_baseline])[0]
+text = """
+To reduce the effects of such peculiarities, most of the following analysis will be 
+computed considering relative measures, to make it possible to compare different
+absolute values.
+
+So then, regarding the sound of movies, what should one expect from the 'average' movie?
+"""
+center.markdown(text, unsafe_allow_html=True)
 space_out(1)
 
 
@@ -155,7 +174,7 @@ text = """
 """
 center.markdown(text, unsafe_allow_html=True)
 
-pad_l = 2
+pad_l = 3
 left, right = pad_cols([pad_l,  cols_baseline - pad_l])
 
 image_counter += 1
@@ -169,9 +188,13 @@ But, is there a difference in where these sounds are more prominent during the m
 """.format(image_name)
 left.markdown(text, unsafe_allow_html=True)
 
-fig = sound_type_distribution_timeline(movies_melt, sound_color_map)
-fig.update_layout(margin_r=0, title=f'<b>{image_name}</b> - What is the most common sound in movies?')
-right.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
+fig = sound_type_distribution_bar(movies_melt, sound_color_map)
+fig.update_layout(
+    margin_r=0, 
+    margin_b=0,
+    margin_t=120,
+    title=f'<b>{image_name}</b> - What is the most common<br>sound in movies?')
+right.plotly_chart(fig, use_container_width=True, config=general_config)
 space_out(1)
 
 
@@ -194,8 +217,13 @@ where usually the credits roll to the sound of some music related to the movie.
 left.markdown(text, unsafe_allow_html=True)
 
 fig = sound_type_share_by__position(positions_df, sound_color_map)
-fig.update_layout(height=250, margin_b=0, title=f'<b>{image_name}</b> - Sound type evolution during movie')
-right.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
+fig.update_layout(
+    height=400, 
+    margin_r=0, 
+    legend_orientation='h',
+    legend_y=-0.3,
+    title=f'<b>{image_name}</b> - Sound type evolution during movie')
+right.plotly_chart(fig, use_container_width=True, config=general_config)
 space_out(1)
 
 
@@ -208,16 +236,20 @@ image_name = image_ref[image_counter]
 center = pad_cols([cols_baseline])[0]
 text = """
 Despite these results, there are some movies that stay far away from the average sound 
-distribution - what we call outliers. Below, let's check the 10 top movies of each 
+distribution - what we call outliers. Below, let's check the 5 top movies of each 
 sound category.
 """
 
 center.markdown(text, unsafe_allow_html=True)
 
-fig = top_movies_by__type(movies_melt, sound_color_map)
-fig.update_traces(textposition='auto')
-fig.update_layout(title=f'<b>{image_name}</b> - Top 10 movies, for each sound type')
-center.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
+fig = top_movies_by__type(movies_melt, sound_color_map)  
+fig.update_layout(
+    title=f'<b>{image_name}</b> - Top 5 movies, for each sound type',
+    margin_r=20,
+    margin_l=0
+)
+# fig.update_xaxes(range=[0,150], dtick=100)
+center.plotly_chart(fig, use_container_width=True, config=general_config)
 
 text = """
 On <b>{}</b> we can highlight the top movie of each category.
@@ -239,8 +271,12 @@ center.markdown(text, unsafe_allow_html=True)
 
 expander = center.beta_expander('Wanna see a specific movie sound type distribution over its duration? Click here!')
 with expander:
-    fig = sound_type_per_position(positions_df, sound_color_map, 5)
-    expander.plotly_chart(fig, use_container_width=True)
+    all_movies = sorted(movies_df['title'].unique().tolist())
+    movie_chosen = expander.selectbox('Movie', all_movies)
+    df = positions_df.loc[positions_df['title'] == movie_chosen]
+    fig = sound_type_per_position(df, sound_color_map, 5)
+    fig.update_layout(legend_orientation='h', legend_y=-0.2, margin_r=0, height=400)
+    expander.plotly_chart(fig, use_container_width=True, config=general_config)
 
 space_out(2)
 
@@ -260,7 +296,7 @@ that change?
 """
 center.markdown(text, unsafe_allow_html=True)
 
-pad_l = 3
+pad_l = 4
 left, right = pad_cols([pad_l,  cols_baseline - pad_l])
 
 color_num_dict = movies_df['color_type'].value_counts().to_dict()
@@ -270,17 +306,26 @@ comparing all {} black and white movies to all the {} movies in color, we see th
 movies in B&W spend more time on dialogue than using other sounds, the opposite of movies with
 color. When considering silence, there not seems to exist a significant difference among 
 movie types.
-<br><br>
-Could this difference just be a sign of the times of when these movies were created?
 """.format(image_name, color_num_dict['Black and White'], color_num_dict['Color'])
 
 left.markdown(text, unsafe_allow_html=True)
 
 fig = sound_share_by__type__color(movies_melt, main_palette)
-fig.update_layout(height=300, margin_b=0, title=f'<b>{image_name}</b> - Color x B&W: Is there a difference in sound use?')
+fig.update_layout(
+    height=400,
+    margin_b=0,
+    margin_r=0, 
+    title=f'<b>{image_name}</b> - Color x B&W<br>Is there a difference in sounds?')
 right.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
-space_out(1)
 
+
+center = pad_cols([cols_baseline])[0]
+text = """<br>
+Could this difference just be a sign of the times of when these movies were created?
+"""
+center.markdown(text, unsafe_allow_html=True)
+
+space_out(1)
 
 
 ### Time evolution
@@ -296,7 +341,7 @@ on how each type of sound has being used from 1920 until 2020?
 """
 center.markdown(text, unsafe_allow_html=True)
 
-pad_l = 3
+pad_l = 4
 left, right = pad_cols([pad_l,  cols_baseline - pad_l])
 
 text = """
@@ -313,7 +358,13 @@ Dialogue already being the most prominent sound.
 left.markdown(text, unsafe_allow_html=True)
 
 fig = sound_share_by__type__year(movies_melt, sound_color_map)
-fig.update_layout(height=300, margin_b=0, title=f'<b>{image_name}</b> - Sound type share evolution, per decade')
+fig.update_layout(
+    height=400, 
+    margin_b=0, 
+    margin_r=0,
+    legend_orientation='h',
+    legend_y=-0.4,
+    title=f'<b>{image_name}</b> - Sound type share evolution<br>1920 - 2020')
 right.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
 
 center = pad_cols([cols_baseline])[0]
@@ -325,7 +376,7 @@ expander = center.beta_expander(text)
 with expander:
     expander.write('Hover on each point to see which movie it is, and its details.')
     fig = sound_share_strip_by__period(movies_melt, sound_color_map)
-    fig.update_layout(title='', margin_t=50, height=400)
+    fig.update_layout(title='', margin_r=0, margin_l=0, margin_t=50, height=400)
     expander.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
 
 space_out(2)
@@ -351,7 +402,12 @@ of each category.
 center.markdown(text, unsafe_allow_html=True)
 
 fig = sound_share_by__type__genre(movies_melt, sound_color_map)
-fig.update_layout(title=f'<b>{image_name}</b> - Sound distribution, per genre (highlight to Top 3 of each category)')
+fig.update_layout(
+    margin_r=50,
+    margin_l=0,
+    margin_b=200,
+    height=1000,
+    title=f'<b>{image_name}</b> - Sound distribution, per genre<br>(highlight to Top 3 of each category)')
 center.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
 
 text = """
@@ -397,7 +453,7 @@ if that is such the case, by analyzing when each of these sounds is used during 
 """
 center.markdown(text, unsafe_allow_html=True)
 
-pad_l = 2
+pad_l = 3
 left, right = pad_cols([pad_l,  cols_baseline - pad_l])
 
 text = """
@@ -410,7 +466,7 @@ chosen_bins = left.select_slider('Bins', [100, 20, 10, 4], value=20)
 smoother = int(100//chosen_bins)
 
 fig = sound_type_by__position_genre(positions_df, smoother, chosen_sound, sound_color_map)
-fig.update_layout(title='', margin_t=0, margin_r=0, height=400, margin_l=120)
+fig.update_layout(title='', margin_t=0, margin_r=0, height=400, margin_l=100)
 right.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
 space_out(2)
 

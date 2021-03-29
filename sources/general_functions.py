@@ -11,8 +11,10 @@ def format_fig(fig):
         template='plotly_white',
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        height=600
+        height=600,
     )
+    fig.update_xaxes(fixedrange = True)
+    fig.update_yaxes(fixedrange = True)
 
     return fig
 
@@ -22,6 +24,13 @@ def facet_prettify(fig_raw, capitalize=True):
         fig = fig_raw.for_each_annotation(lambda x: x.update(text = x.text.split('=')[1].replace('_', ' ').title()))
     else:
         fig = fig_raw.for_each_annotation(lambda x: x.update(text = x.text.split('=')[1]))
+    return fig
+
+
+def leave_only_slider(fig):
+    fig['layout']['updatemenus']=[]
+    fig['layout']['sliders'][0]['x']=0
+    fig['layout']['sliders'][0]['len']=1
     return fig
 
 

@@ -3,7 +3,7 @@ import plotly.express as px
 import streamlit as st
 import copy
 
-from .general_functions import facet_prettify, vectorize_column, break_text, format_fig
+from .general_functions import facet_prettify, vectorize_column, break_text, format_fig, leave_only_slider
 import numpy as np
 
 
@@ -61,6 +61,46 @@ def sound_type_distribution_timeline(movies_melt, sound_color_map):
     return fig
 
 
+def sound_type_distribution_bar(movies_melt, sound_color_map):
+    # Distribution of each sound type
+    df = movies_melt\
+            .groupby(['var_name'])\
+            .agg({'value':['mean', 'median', 'sum']})\
+            .droplevel(0, axis=1)\
+            .reset_index()\
+            .sort_values(by=['mean'], ascending=False)
+
+    df.loc[:, 'total'] = df['sum'].sum()
+
+    df.loc[:, 'percent'] = 100*df['sum']/df['total']
+    # df.loc[:, 'percent'] = np.round(df['percentage'], 2)
+    df.loc[:, 'x_end'] = df['percent'].cumsum()
+    df.loc[:, 'x_start'] = df['x_end'].shift(1).fillna(0)
+    df.loc[:, 'delta'] = df['x_end'] - df['x_start']
+    # df.loc[:, 'text'] = df.apply(lambda x: "<b>{}</b><br>({:.1f}%)".format(x['var_name'], x['percent']), axis=1)
+
+    df.loc[:, 'y'] = 1
+
+    fig = px.bar(df, y='var_name', x='percent', color='var_name' ,
+                    color_discrete_map=sound_color_map)
+
+    fig.update_traces(texttemplate='%{x:.1f}%', textposition='inside')
+
+    fig = format_fig(fig)
+
+    fig.update_layout(
+        height=300,
+        xaxis_range=[-1, 60],
+        xaxis_dtick = 50,
+        yaxis_title='',
+        xaxis_title='Share of movie (%)',
+        xaxis_ticksuffix='%',
+        showlegend=False,
+        title='Sound type distribution'
+    )
+    return fig
+
+
 def sound_type_share_by__position(positions_df, sound_color_map):
     
     smooth = 100/(positions_df['position'].nunique() - 1)
@@ -107,29 +147,27 @@ def top_movies_by__type(movies_melt, sound_color_map):
 
     df.loc[:, 'movie_genres'] = df['genres'].apply(lambda x: ', '.join(x))
 
-    top = df.loc[df['var_rank'] <= 10].copy()
+    top = df.loc[df['var_rank'] <= 5].copy()
 
-    top.loc[:, 'text'] = top['title'].apply(lambda x:f"<i>{break_text(x, 16)}</i>")
+    top.loc[:, 'text'] = top['title'].apply(lambda x:f"<i>{break_text(x, 10)}</i>")
 
-    fig = px.bar(top, y='var_rank', x='value', facet_col='var_name', orientation='h', color='var_name',
-                color_discrete_map= sound_color_map, text='text', facet_col_spacing=0.1,
+    fig = px.bar(top, x='var_rank', y='value', facet_row='var_name', orientation='v', color='var_name',
+                color_discrete_map= sound_color_map, text='text', facet_row_spacing=0.05,
                 hover_name='title', hover_data=['movie_genres']
                 )
 
-    fig.update_yaxes(autorange='reversed')
-    fig.update_yaxes(col=1, tickvals=[1, 5, 10], title='Ranking', tickprefix='Top')
+    # fig.update_yaxes(autorange='reversed')
+    fig.update_xaxes(tickvals=[1, 5], title='Ranking', tickprefix='Top ', row=1)
 
-    fig.update_xaxes(range=[-1, 101], dtick= 50, ticksuffix='%', title='Share of movie (%)')
+    fig.update_yaxes(range=[-1, 150], dtick= 100, ticksuffix='%', title='Share <br>of movie (%)')
 
-    fig.update_traces(textposition='inside')
+    fig.update_traces(textposition='outside')
 
     fig = facet_prettify(fig, False)
 
     fig.update_layout(
         showlegend=False, 
-        title='Top 10 movies, for each sound type',
-        margin_t=100,
-        height=600
+        title='Top 5 movies, for each sound type',
     )
     fig = format_fig(fig)
     return fig
@@ -149,8 +187,7 @@ def sound_type_per_position(positions_df, sound_color_map, smooth):
 
     df = df.sort_values(by=['top_250_rank', 'position'])
 
-    fig = px.line(df, y='percent', x='position', animation_frame='Movie', color='type',
-                    color_discrete_map=sound_color_map)
+    fig = px.line(df, y='percent', x='position', color='type', color_discrete_map=sound_color_map)
 
     fig.update_xaxes(range=[0,100], title='Position of movie', ticksuffix='%')
     fig.update_yaxes(range=[0,100], ticksuffix='%', title='Relative duration of sound', dtick=25)
@@ -178,26 +215,28 @@ def sound_share_by__type__color(movies_melt, main_palette):
 
     op = 'median'
     df.loc[:, 'rank'] = df.groupby(['var_name'])[op].rank(ascending=False)
-    df.loc[:, 'text'] = df[op].apply(lambda x: "{:.1f}%".format(x))
-    df.loc[df['rank'] == 1, 'text'] = df[op].apply(lambda x: "<b>{:.1f}%</b>".format(x))
+    df.loc[:, 'text'] = df[op].apply(lambda x: "{:.0f}%".format(x))
+    df.loc[df['rank'] == 1, 'text'] = df[op].apply(lambda x: "<b>{:.0f}%</b>".format(x))
 
-    fig = px.bar(df, x='color_type', y='median', facet_col='var_name', color='color_type', text='text',
+    fig = px.bar(df, x='median', y='var_name', color='color_type', text='text', barmode='group',
                     color_discrete_map={'Color':main_palette[6], 'Black and White':'black'}
                 )
                                                 
-    fig = facet_prettify(fig)  
+    # fig = facet_prettify(fig)  
 
-    fig.update_xaxes(title='')
-    fig.update_yaxes(title='Median usage of each sound type', col=1, 
+    fig.update_yaxes(title='')
+    fig.update_xaxes(title='Median usage', col=1, 
                     ticksuffix='%')
-    fig.update_yaxes(tickvals=[0,60], range=[0, 61])
+    fig.update_xaxes(tickvals=[0,60], range=[0, 65])
     fig.update_traces(textposition='outside')
-    fig.update_layout(
-        title='Color x Black and White: Is there a difference in sound use?',
-        margin_t=120,
-        showlegend=False
-    )
     fig = format_fig(fig)
+    fig.update_layout(
+        title='Color x Black and White<br>Is there a difference in sound use?',
+        margin_t=120,
+        legend_orientation='h',
+        legend_title='Color type',
+        legend_y=-0.4
+    )
     return fig
 
 
@@ -230,22 +269,25 @@ def sound_share_by__type__genre(movies_melt_df, sound_color_map):
     df = df.sort_values(by=['Operation', 'not_highlight','var_name', 'value'], ascending=True)
 
     fig = px.bar(df, x='value', y='y_axis', text='text', orientation='h',
-                facet_col_spacing=0.05, facet_col='var_name', animation_frame='Operation',
+                facet_col_spacing=0.1, facet_col='var_name', animation_frame='Operation',
                 hover_name='genres', hover_data=['#Movies'], #category_orders={'y_axis':order},
                 color_discrete_map=sound_color_map,  color='color_highlight')
 
-    fig.update_xaxes(title='Share of movie (%)', ticksuffix='%', tickvals=[0, 70])
+    fig.update_xaxes(title='Share<br>of movie (%)', ticksuffix='%', tickvals=[0, 100], range=[0,110])
     fig.update_yaxes(col=1, autorange='reversed', title='')
 
     fig = facet_prettify(fig)
     fig = format_fig(fig)
 
     fig.update_layout(
-        title='Genre sound distribution, highlight to Top 3 of each category ',
+        title='Genre sound distribution,<br>highlight to Top 3 of each category ',
         margin_t=120,
         margin_r=50,
         height=700,
         showlegend=False)
+
+    fig = leave_only_slider(fig)
+    fig['layout']['sliders'][0]['pad']=dict(r= 10, t= 100)
 
     return fig
 
@@ -279,6 +321,8 @@ def sound_share_strip_per_genre(movies_melt_df, sound_color_map):
         yaxis_title='Sound type',
         title='Sound distribution, per genre',
         xaxis_title='Share of movie')
+
+    fig = leave_only_slider(fig)
     
     return fig
 
@@ -294,9 +338,9 @@ def sound_share_by__type__year(movies_melt_df, sound_color_map):
             .droplevel(0, axis=1)\
             .reset_index()
 
-    df.loc[:, 'x_axis'] = df.apply(lambda x: "{:.0f}<br>({})".format(x['decade'], x['nunique']), axis=1)
+    df.loc[:, 'x_axis'] = df.apply(lambda x: "{:.0f} ({})".format(x['decade'], x['nunique']), axis=1)
 
-    fig = px.line(df, x='x_axis', y='mean', color='var_name', color_discrete_map=sound_color_map)
+    fig = px.line(df, x='decade', y='mean', color='var_name', color_discrete_map=sound_color_map)
     fig = format_fig(fig)
     fig.update_layout(
         title='Evolution of share of each sound type on movies, per decade',
@@ -304,6 +348,7 @@ def sound_share_by__type__year(movies_melt_df, sound_color_map):
         yaxis_ticksuffix='%',
         legend_title='Sound type',
         xaxis_title='Decade',
+        xaxis_tickangle=45,
         yaxis_dtick=25,
         height=400
     )
@@ -315,7 +360,7 @@ def sound_share_strip_by__period(movies_melt_df, sound_color_map):
     df = movies_melt_df.copy()
 
     df.loc[:, 'period'] = (np.floor(df['year']/20)*20).astype(int)
-    df.loc[:, 'period'] = df['period'].apply(lambda x: f"{x} - {x+19}")
+    df.loc[:, 'period'] = df['period'].apply(lambda x: f"{x}-<br>{x+19}")
 
     fig = px.strip(df.sort_values(by='period'), y='value', color='var_name',
                 facet_col='period', color_discrete_map=sound_color_map,
@@ -327,6 +372,8 @@ def sound_share_strip_by__period(movies_melt_df, sound_color_map):
     fig.update_layout(
         title = 'By which type of sound each movie is composed?', 
         showlegend=True, 
+        legend_orientation='h',
+        legend_y=-0.1,
         margin_t=120,
         legend_title='Type of sound',
         yaxis_title='')
@@ -336,7 +383,6 @@ def sound_share_strip_by__period(movies_melt_df, sound_color_map):
     return fig
 
 
-# Where do the silences occur?
 def sound_type_by__position_genre(positions_df, smooth, sound_type, sound_color_map):
     h = 230
     grey = f"rgb({h},{h},{h})"
@@ -379,6 +425,7 @@ def sound_type_by__position_genre(positions_df, smooth, sound_type, sound_color_
     fig.update_traces(patch={"line":{"width":3}}, 
                     selector={"name":"True"})
 
+
     fig.update_layout(
         title='At which part the movie is the quietest? (View per genre)',
         yaxis_title=f'{sound_type} relevance',
@@ -390,7 +437,10 @@ def sound_type_by__position_genre(positions_df, smooth, sound_type, sound_color_
         xaxis_dtick=25,
         yaxis_range=[0, max_range]
     )
+
+    fig = leave_only_slider(fig)
     fig = format_fig(fig)
+    
     return fig
 
 
@@ -422,12 +472,12 @@ def all_movies_similarity(umap_df):
         height=500
     )
 
-    text = """
-    To group, we consider each movie release year, sound distribution, associated genres and coloring technique.<br>
-    Here, the dimensions are a projection, so the only real meaning is that closer points have more similar characteristics.
-    """
-    fig.add_hline(y=-3, line_color='white', 
-                annotation_text=text, annotation_position='top left')
+    # text = """
+    # To group, we consider each movie release year, sound distribution, associated genres and coloring technique.<br>
+    # Here, the dimensions are a projection, so the only real meaning is that closer points have more similar characteristics.
+    # """
+    # fig.add_hline(y=-3, line_color='white', 
+    #             annotation_text=text, annotation_position='top left')
     
     return fig
 
@@ -448,7 +498,7 @@ def all_movies_hist_summary(movies_df, main_palette):
     fig = px.histogram(melt, x='value', facet_col='variable', nbins=10, histnorm='percent',
                     color_discrete_sequence=main_palette[5:])
 
-    fig.update_xaxes(matches=None, categoryorder='category ascending')
+    fig.update_xaxes(matches=None, categoryorder='category ascending', title='')
     fig = format_fig(fig)
     fig = facet_prettify(fig)
     fig.update_layout(
